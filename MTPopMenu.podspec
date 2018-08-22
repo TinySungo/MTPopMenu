@@ -84,7 +84,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/TinySungo/MTPopMenu.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/TinySungo/MTPopMenu.git", :tag => "#{s.version}", :commit => "a18edb52c4e0b53b110102099d0f41f50ebc12a1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
