@@ -13,19 +13,19 @@ public class MTPopMenu: UIView {
     // menu视图
     static let menu = MTPopMenu(frame: .zero)
     // 标题数组
-    private var titleArray: [String]?
+    var titleArray: [String]?
     // 图片文字的对象数组
-    private var menuArray = [MTPopMenuModel]() {
+    var menuArray = [MTPopMenuModel]() {
         didSet {
             refreshUI()
         }
     }
     // 宽度
-    private var tableWidth: CGFloat = 0
+    var tableWidth: CGFloat = 0
     // anchorView相对于window的位置
-    private var anchorRect = CGRect.zero
+    var anchorRect = CGRect.zero
     // 展示列表的table
-    private lazy var table: UITableView = {
+    lazy var table: UITableView = {
         let tempTableView = UITableView (frame: .zero, style: .plain)
         tempTableView.delegate = self
         tempTableView.dataSource = self
@@ -72,7 +72,7 @@ public class MTPopMenu: UIView {
         }
     }
     // 选择的回调
-    typealias closureBlock = (Int, MTPopMenuModel) -> Void
+    public typealias closureBlock = (Int, MTPopMenuModel) -> Void
     public var didSelectItem: closureBlock?
     
     override init(frame: CGRect) {
@@ -85,7 +85,7 @@ public class MTPopMenu: UIView {
     }
     
     // 更新视图
-    private func refreshUI() {
+    func refreshUI() {
         self.table.removeFromSuperview()
         self.addSubview(self.table)
         calculateWidth()
@@ -94,7 +94,7 @@ public class MTPopMenu: UIView {
     }
     
     // 设置选中的model
-    private func updateSelectedModel() {
+    func updateSelectedModel() {
         for (index, item) in self.menuArray.enumerated() {
             var model = item
             model.selected = (index == selectIndex)
@@ -104,7 +104,7 @@ public class MTPopMenu: UIView {
     }
     
     // 更新frame
-    private func updateFrame() {
+    func updateFrame() {
         // 设置frame
         let X = self.anchorRect.size.width / 2.0 + self.anchorRect.origin.x - self.tableWidth / 2.0
         var frame = CGRect.init(x: X, y: self.anchorRect.maxY + 20, width: self.tableWidth, height: 0)
@@ -118,14 +118,15 @@ public class MTPopMenu: UIView {
     }
     
     // 计算宽度
-    private func calculateWidth() {
+    func calculateWidth() {
         for model in self.menuArray {
-            let rect = NSString(string: model.title!).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 20), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : self.titleFont], context: nil)
+            
+            let rect = NSString(string: model.title!).boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 20), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.titleFont], context: nil)
             self.tableWidth = max(self.tableWidth, rect.width + self.menuCellPadding * 2.0)
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         dismiss()
     }
     
@@ -170,15 +171,15 @@ public extension MTPopMenu {
 
 
 extension MTPopMenu : UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menuArray.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.menuCellHeight
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MTPopMenuTableViewCell", for: indexPath) as! MTPopMenuTableViewCell
         
         cell.backgroundColor = self.menuBgColor
@@ -190,7 +191,7 @@ extension MTPopMenu : UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.selectIndex = indexPath.row
 
         if self.didSelectItem != nil {

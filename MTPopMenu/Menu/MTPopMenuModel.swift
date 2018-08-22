@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct MTPopMenuModel {
+public struct MTPopMenuModel {
     var title: String?
     var image: String?
     var selected: Bool = false
