@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "MTPopMenu"
   s.version      = "0.0.1"
-  s.summary      = "A short description of MTPopMenu."
+  s.summary      = "the project provide a sample menu for u like wechat homepage"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -26,10 +26,12 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
 
-  the project provide a sample menu for u ❤️
+  the project provide a sample menu for u ❤
+  WeChat homepage + button 
+  u can design yourself UI
                    DESC
 
-  s.homepage     = "https://github.com/TinySungo/popMenu"
+  s.homepage     = "https://github.com/TinySungo/MTPopMenu"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
@@ -69,7 +71,7 @@ Pod::Spec.new do |s|
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
+  s.ios.deployment_target = "9.0"
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
@@ -81,7 +83,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/TinySungo/popMenu", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/TinySungo/MTPopMenu.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -92,7 +94,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "PopMenu/*.{h,m}"
+  s.source_files  = "MTPopMenu/Menu/*.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"

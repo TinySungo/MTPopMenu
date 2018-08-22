@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MTPopMenu: UIView {
+public class MTPopMenu: UIView {
     
     // menu视图
     static let menu = MTPopMenu(frame: .zero)
@@ -142,7 +142,7 @@ class MTPopMenu: UIView {
     }
 }
 
-extension MTPopMenu {
+public extension MTPopMenu {
     static func sharedPopMenu() -> MTPopMenu {
         return self.menu
     }
