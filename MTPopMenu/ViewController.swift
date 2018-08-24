@@ -11,29 +11,36 @@ import UIKit
 class ViewController: UIViewController {
     
     let menu = MTPopMenu.sharedPopMenu()
+    // 元祖记录（选中index, 标题）
+    var titleArray = [(0, ["第一个按钮", "啦啦啦"]), (0, ["第二个按钮", "呵呵呵呵", "汪汪汪汪"]), (0, ["第三个按钮", "大大大"])]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let btn = UIButton(frame: CGRect.init(x: 100, y: 100, width: 30, height: 30))
-        btn.backgroundColor = .red
-        btn.addTarget(self, action: #selector(showMenu(btn:)), for: .touchUpInside)
-        self.view.addSubview(btn)
-        
-        let btn1 = UIButton(frame: CGRect.init(x: 200, y: 200, width: 30, height: 30))
-        btn1.backgroundColor = .red
-        btn1.addTarget(self, action: #selector(showMenu(btn:)), for: .touchUpInside)
-        self.view.addSubview(btn1)
+        for (index, _) in self.titleArray.enumerated() {
+            let btn = UIButton(frame: CGRect.init(x: 50 + 100 * index, y: 100, width: 50, height: 30))
+            btn.backgroundColor = .red
+            btn.addTarget(self, action: #selector(showMenu(btn:)), for: .touchUpInside)
+            btn.tag = index
+            self.view.addSubview(btn)
+        }
     }
 
     @objc func showMenu(btn: UIButton) {
-        menu.popMenu(anchorView: btn, titleArray: ["全部", "哈哈哈", "啦啦啦啦啦啦", "哒哒哒哒哒"])
+        
+        var tump = titleArray[btn.tag]
+        
+        menu.popMenu(anchorView: btn, titleArray: tump.1)
         menu.selectTextColor = .green // 选中字体颜色
+        menu.normalTextColor = .yellow // 默认颜色
         menu.menuBgColor = .lightGray // table背景色
+        menu.selectIndex = tump.0
         
         menu.didSelectItem = { (index, model) in
-            print(index, model)
+            tump.0 = index
+            self.titleArray[btn.tag] = tump
+            // TODO 选中处理
         }
     }
 }

@@ -13,7 +13,6 @@ class MTPopMenuTableViewCell: UITableViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
-        label.textColor = .white
         return label
     }()
     
@@ -26,17 +25,22 @@ class MTPopMenuTableViewCell: UITableViewCell {
         self.titleLabel.frame = self.bounds
     }
 
-    func loadCell(model: MTPopMenuModel, size: CGSize, font: UIFont, highlightColor: UIColor) {
+    func loadCell(model: MTPopMenuModel,
+                  size: CGSize,
+                  font: UIFont,
+                  highlightColor: UIColor,
+                  normalColor: UIColor) {
         self.titleLabel.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         self.titleLabel.font = font
         self.titleLabel.text = model.title
+        self.titleLabel.textColor = normalColor
         self.titleLabel.highlightedTextColor = highlightColor
 
         if model.selected {
             self.titleLabel.textColor = highlightColor
         }
         else {
-            self.titleLabel.textColor = .white
+            self.titleLabel.textColor = normalColor
         }
     }
     

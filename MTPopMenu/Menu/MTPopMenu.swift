@@ -56,13 +56,19 @@ public class MTPopMenu: UIView {
         }
     }
     // 文字大小
-    public var titleFont = UIFont.systemFont(ofSize: 14)
+    var titleFont = UIFont.systemFont(ofSize: 14)
     // cell两边的间距
     public var menuCellPadding: CGFloat = 20.0
     // 选中第几个
     public var selectIndex = 0 {
         didSet {
             updateSelectedModel()
+        }
+    }
+    // 默认的文字颜色
+    public var normalTextColor = UIColor.white {
+        didSet {
+            self.table.reloadData()
         }
     }
     // 选中的文字颜色
@@ -186,7 +192,8 @@ extension MTPopMenu : UITableViewDataSource, UITableViewDelegate {
         cell.loadCell(model: self.menuArray[indexPath.row],
                       size: CGSize(width: self.tableWidth, height: self.menuCellHeight),
                       font: self.titleFont,
-                      highlightColor: self.selectTextColor)
+                      highlightColor: self.selectTextColor,
+                      normalColor: self.normalTextColor)
         
         return cell
     }
