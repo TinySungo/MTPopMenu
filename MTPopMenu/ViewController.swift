@@ -11,7 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     
     let menu = MTPopMenu.sharedPopMenu()
-    // 元祖记录（选中index, 标题）
+    // 这里用元祖记录（选中index, 标题）
+    // 当然也可以用别的方式去记录你自己选中的index，再传给MTPopMenu
     var titleArray = [(0, ["第一个按钮", "啦啦啦"]), (0, ["第二个按钮", "呵呵呵呵", "汪汪汪汪"]), (0, ["第三个按钮", "大大大"])]
 
     override func viewDidLoad() {
